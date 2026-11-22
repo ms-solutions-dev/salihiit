@@ -1,0 +1,187 @@
+# ══════════════════════════════════════════════════════════════════════
+# SaliHIIT — project description for XcodeGen.
+#
+# The `.xcodeproj` is a build product and listed in `.gitignore`; this file
+# is the source of truth. Generate the project with `xcodegen generate`.
+# ══════════════════════════════════════════════════════════════════════
+
+name: SaliHIIT
+
+options:
+  bundleIdPrefix: dev.ms-solutions
+  developmentLanguage: en
+  deploymentTarget:
+    iOS: "26.0"
+    watchOS: "26.0"
+  createIntermediateGroups: true
+  groupSortPosition: top
+
+packages:
+  Core:
+    path: Packages/Core
+  Design:
+    path: Packages/Design
+  Signals:
+    path: Packages/Signals
+  Storage:
+    path: Packages/Storage
+  Connectivity:
+    path: Packages/Connectivity
+  Interface:
+    path: Packages/Interface
+  Control:
+    path: Packages/Control
+
+settings:
+  base:
+    MARKETING_VERSION: "0.1.0"
+    CURRENT_PROJECT_VERSION: "6"
+    SWIFT_VERSION: "6.0"
+    SWIFT_STRICT_CONCURRENCY: complete
+    LOCALIZATION_PREFERS_STRING_CATALOGS: YES
+    SWIFT_EMIT_LOC_STRINGS: YES
+
+targets:
+  SaliHIIT:
+    type: application
+    platform: iOS
+    sources:
+      - App/Sources
+      - Shared
+      - path: App/Resources
+        buildPhase: resources
+        excludes:
+          - Stimmen
+      # As a folder reference: every voice has 1.m4a to 5.m4a; laid out flat they would overwrite each other.
+      - path: App/Resources/Stimmen
+        type: folder
+        buildPhase: resources
+    dependencies:
+      - package: Core
+      - package: Design
+      - package: Signals
+      - package: Storage
+      - package: Connectivity
+      - package: Control
+      - package: Interface
+      - target: SaliHIITWidget
+      - target: SaliHIITWatch
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: dev.ms-solutions.salihiit
+        TARGETED_DEVICE_FAMILY: "1"
+        ASSETCATALOG_COMPILER_APPICON_NAME: AppIcon
+        # Alternate app icons, selectable in the settings.
+        ASSETCATALOG_COMPILER_ALTERNATE_APP_ICON_NAMES: AppIconRing AppIconStoppuhr AppIconMonogramm AppIconPuls AppIconDunkel
+        ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS: YES
+    entitlements:
+      path: App/SaliHIIT.entitlements
+      properties:
+        com.apple.security.application-groups:
+          - group.dev.ms-solutions.salihiit
+        # Only for `startWatchApp(with:)`: the iPhone wakes the watch's workout session.
+        com.apple.developer.healthkit: true
+    info:
+      path: App/Info.plist
+      properties:
+        CFBundleDisplayName: SaliHIIT
+        CFBundleShortVersionString: $(MARKETING_VERSION)
+        CFBundleVersion: $(CURRENT_PROJECT_VERSION)
+        ITSAppUsesNonExemptEncryption: false
+        CADisableMinimumFrameDurationOnPhone: true
+        UILaunchScreen: {}
+        UIApplicationSceneManifest:
+          UIApplicationSupportsMultipleScenes: false
+        UISupportedInterfaceOrientations:
+          - UIInterfaceOrientationPortrait
+          - UIInterfaceOrientationLandscapeLeft
+          - UIInterfaceOrientationLandscapeRight
+        CFBundleLocalizations: [de, tr, en]
+        CFBundleDevelopmentRegion: en
+        # Signals keep running while the device is locked.
+        UIBackgroundModes: [audio]
+        NSSupportsLiveActivities: true
+        NSHealthShareUsageDescription: SaliHIIT shows your heart rate and calories from the Apple Watch.
+        NSHealthUpdateUsageDescription: SaliHIIT saves your interval workouts to Apple Health.
+
+  # Live Activity and Dynamic Island.
+  SaliHIITWidget:
+    type: app-extension
+    platform: iOS
+    sources:
+      - Widget/Sources
+      - Shared
+      - path: App/Resources/Localizable.xcstrings
+        buildPhase: resources
+    dependencies:
+      - package: Core
+      - package: Design
+      - sdk: WidgetKit.framework
+      - sdk: SwiftUI.framework
+      - sdk: AppIntents.framework
+      - sdk: ActivityKit.framework
+    entitlements:
+      path: Widget/SaliHIITWidget.entitlements
+      properties:
+        com.apple.security.application-groups:
+          - group.dev.ms-solutions.salihiit
+    info:
+      path: Widget/Info.plist
+      properties:
+        CFBundleDisplayName: SaliHIIT
+        CFBundleShortVersionString: $(MARKETING_VERSION)
+        CFBundleVersion: $(CURRENT_PROJECT_VERSION)
+        CFBundleLocalizations: [de, tr, en]
+        NSExtension:
+          NSExtensionPointIdentifier: com.apple.widgetkit-extension
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: dev.ms-solutions.salihiit.widget
+        TARGETED_DEVICE_FAMILY: "1"
+        GENERATE_INFOPLIST_FILE: NO
+        SKIP_INSTALL: YES
+
+  # Watch app: works standalone; the workout session always runs here.
+  SaliHIITWatch:
+    type: application
+    platform: watchOS
+    sources:
+      - Watch/Sources
+      - path: Watch/Resources
+        excludes:
+          - Stimmen
+      - path: Watch/Resources/Stimmen
+        type: folder
+        buildPhase: resources
+      - path: App/Resources/Localizable.xcstrings
+        buildPhase: resources
+    dependencies:
+      - package: Core
+      - package: Design
+      - package: Signals
+      - package: Storage
+      - package: Connectivity
+      - package: Control
+    entitlements:
+      path: Watch/SaliHIITWatch.entitlements
+      properties:
+        com.apple.developer.healthkit: true
+    info:
+      path: Watch/Info.plist
+      properties:
+        CFBundleDisplayName: SaliHIIT
+        CFBundleShortVersionString: $(MARKETING_VERSION)
+        CFBundleVersion: $(CURRENT_PROJECT_VERSION)
+        CFBundleLocalizations: [de, tr, en]
+        WKApplication: true
+        CFBundleIconName: AppIcon
+        WKCompanionAppBundleIdentifier: dev.ms-solutions.salihiit
+        WKBackgroundModes: [workout-processing]
+        NSHealthShareUsageDescription: SaliHIIT shows your heart rate and calories during the workout.
+        NSHealthUpdateUsageDescription: SaliHIIT saves your interval workouts to Apple Health.
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: dev.ms-solutions.salihiit.watchkitapp
+        TARGETED_DEVICE_FAMILY: "4"
+        GENERATE_INFOPLIST_FILE: NO
+        ASSETCATALOG_COMPILER_APPICON_NAME: AppIcon

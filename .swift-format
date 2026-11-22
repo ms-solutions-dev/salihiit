@@ -1,0 +1,18 @@
+{
+  "version": 1,
+  "lineLength": 110,
+  "indentation": { "spaces": 4 },
+  "respectsExistingLineBreaks": true,
+  "lineBreakBeforeEachArgument": false,
+  "prioritizeKeepingFunctionOutputTogether": true,
+  "rules": {
+    "AlwaysUseLowerCamelCase": true,
+    "NeverUseImplicitlyUnwrappedOptionals": true,
+    "UseLetInEveryBoundCaseVariable": true,
+    "ReturnVoidInsteadOfEmptyTuple": true,
+    "OrderedImports": true,
+    "UseShorthandTypeNames": true,
+    "AmbiguousTrailingClosureOverload": true,
+    "NoLeadingUnderscores": false
+  }
+}

@@ -1,0 +1,68 @@
+[
+  {
+    "id": "ben",
+    "name": "Ben",
+    "sprache": "de",
+    "geschlecht": "m",
+    "beschreibung": {
+      "de": "männlich, jung und locker",
+      "tr": "erkek, genç ve rahat",
+      "en": "male, young and easy-going"
+    }
+  },
+  {
+    "id": "laura-de",
+    "name": "Laura",
+    "sprache": "de",
+    "geschlecht": "w",
+    "beschreibung": {
+      "de": "weiblich, klar und bestimmt",
+      "tr": "kadın, net ve kararlı",
+      "en": "female, clear and firm"
+    }
+  },
+  {
+    "id": "hasan",
+    "name": "Hasan",
+    "sprache": "tr",
+    "geschlecht": "m",
+    "beschreibung": {
+      "de": "männlich, warm",
+      "tr": "erkek, sıcak",
+      "en": "male, warm"
+    }
+  },
+  {
+    "id": "elif",
+    "name": "Elif",
+    "sprache": "tr",
+    "geschlecht": "w",
+    "beschreibung": {
+      "de": "weiblich, ruhig und natürlich",
+      "tr": "kadın, sakin ve doğal",
+      "en": "female, calm and natural"
+    }
+  },
+  {
+    "id": "charlie",
+    "name": "Charlie",
+    "sprache": "en",
+    "geschlecht": "m",
+    "beschreibung": {
+      "de": "männlich, tief und sicher",
+      "tr": "erkek, derin ve kendinden emin",
+      "en": "male, deep and confident"
+    }
+  },
+  {
+    "id": "laura",
+    "name": "Laura",
+    "sprache": "en",
+    "geschlecht": "w",
+    "beschreibung": {
+      "de": "weiblich, begeistert",
+      "tr": "kadın, coşkulu",
+      "en": "female, enthusiastic"
+    }
+  }
+]

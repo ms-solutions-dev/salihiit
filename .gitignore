@@ -1,0 +1,15 @@
+# XcodeGen: `xcodegen generate`
+*.xcodeproj
+*.xcworkspace
+.build/
+build/
+DerivedData/
+.dd/
+.DS_Store
+__pycache__/
+*.xcuserstate
+App/Info.plist
+Widget/Info.plist
+Watch/Info.plist
+# Agenten-Arbeitsbäume
+.claude/worktrees/
