@@ -48,6 +48,36 @@ SaliHIIT is not on the App Store yet. Until then you can build it yourself (see 
 - **Six app icons** to choose from in the settings.
 - **English, German and Turkish**, following the device language.
 
+## FAQ
+
+### Is SaliHIIT a Tabata timer?
+
+Yes. SaliHIIT is a Tabata and HIIT interval timer for iPhone and Apple Watch. You set preparation, work and rest times, rounds, circuits and a cool-down, and it guides you through them with full-screen colours, sounds, haptics and an optional voice coach.
+
+### Does SaliHIIT have ads or a subscription?
+
+No. There are no ads, no subscription and no account. The source code is free software under GPL-3.0.
+
+### Does it work on the Apple Watch?
+
+Yes. The Apple Watch app has the full feature set, and workouts started on the watch are saved to Apple Health with heart rate and calories.
+
+### Will my music stop during a workout?
+
+No. Music from other apps keeps playing and is only lowered briefly for each signal.
+
+### Can I control the timer from the lock screen?
+
+Yes. A Live Activity and the Dynamic Island show the current phase with buttons to pause, resume and skip.
+
+### Does SaliHIIT collect any data?
+
+No. Templates and settings stay on your devices and are only synced between your iPhone and your Apple Watch. See [Privacy](#privacy).
+
+### How can I get it?
+
+SaliHIIT is not on the App Store yet. You can build it yourself with Xcode, see [Building](#building).
+
 ## Requirements
 
 | | |
